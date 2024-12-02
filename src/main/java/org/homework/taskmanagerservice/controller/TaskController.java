@@ -5,7 +5,6 @@ import org.homework.taskmanagerservice.dto.request.NewTaskRequest;
 import org.homework.taskmanagerservice.dto.request.UpdateTaskRequest;
 import org.homework.taskmanagerservice.dto.response.TaskResponse;
 import org.homework.taskmanagerservice.service.TaskService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,27 +24,27 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/task")
-    public ResponseEntity<TaskResponse> createTask(@RequestBody @Validated NewTaskRequest request) {
-        return ResponseEntity.ok(taskService.createTask(request));
+    public TaskResponse createTask(@RequestBody @Validated NewTaskRequest request) {
+        return taskService.createTask(request);
     }
 
     @GetMapping("/task/{taskId}")
-    public ResponseEntity<TaskResponse> getTaskById(@PathVariable Long taskId) {
-        return ResponseEntity.ok(taskService.getTask(taskId));
+    public TaskResponse getTaskById(@PathVariable Long taskId) {
+        return taskService.getTask(taskId);
     }
 
     @PutMapping("/task")
-    public ResponseEntity<TaskResponse> updateTask(@RequestBody @Validated UpdateTaskRequest request) {
-        return ResponseEntity.ok(taskService.updateTask(request));
+    public TaskResponse updateTask(@RequestBody @Validated UpdateTaskRequest request) {
+        return taskService.updateTask(request);
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<List<TaskResponse>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getTasks());
+    public List<TaskResponse> getAllTasks() {
+        return taskService.getTasks();
     }
 
     @DeleteMapping("/task/{taskId}")
-    public ResponseEntity<String> deleteTask(@PathVariable Long taskId) {
-        return ResponseEntity.ok(taskService.deleteTask(taskId));
+    public String deleteTask(@PathVariable Long taskId) {
+        return taskService.deleteTask(taskId);
     }
 }

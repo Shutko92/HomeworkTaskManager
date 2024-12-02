@@ -25,10 +25,6 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j(topic = "TaskManagerService")
 public class LoggingAspect {
-    /*
-    Логов очень много только потому, что нужно сделать каждый адвайс.
-    по-нормальному аспектов меньше и логи более структурированы.
-     */
 
     @Pointcut("@within(org.springframework.stereotype.Service)")
     public void serviceLayer() {
