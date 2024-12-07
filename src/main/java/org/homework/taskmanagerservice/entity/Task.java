@@ -2,6 +2,8 @@ package org.homework.taskmanagerservice.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,4 +31,6 @@ public class Task {
     private String description;
     @Column(name = "user_id")
     private long userId;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 }

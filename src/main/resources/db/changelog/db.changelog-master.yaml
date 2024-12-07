@@ -2,3 +2,7 @@ databaseChangeLog:
   - include:
       file: 01.00/db.changelog.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: 02.00/db.changelog.yaml
+      relativeToChangelogFile: true
