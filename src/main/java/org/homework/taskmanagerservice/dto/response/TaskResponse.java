@@ -3,6 +3,7 @@ package org.homework.taskmanagerservice.dto.response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.homework.taskmanagerservice.entity.TaskStatus;
 
 @Getter
 @Setter
@@ -12,4 +13,5 @@ public class TaskResponse {
     private String title;
     private String description;
     private long userId;
+    private TaskStatus status;
 }
