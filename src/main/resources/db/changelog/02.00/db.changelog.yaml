@@ -5,9 +5,9 @@ databaseChangeLog:
       relativeToChangelogFile: true
 
   - changeSet:
-      id: 01.00
+      id: 02.00
       author: Ilya Shutko
-      logicalFilePath: 01.00/db.changelog.yaml
+      logicalFilePath: 02.00/db.changelog.yaml
       changes:
         - tagDatabase:
-            tag: 01.00
+            tag: 02.00

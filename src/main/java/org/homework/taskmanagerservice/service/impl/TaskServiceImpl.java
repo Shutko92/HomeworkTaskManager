@@ -1,11 +1,14 @@
 package org.homework.taskmanagerservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.homework.taskmanagerservice.dto.MessageEvent;
 import org.homework.taskmanagerservice.dto.request.NewTaskRequest;
 import org.homework.taskmanagerservice.dto.request.UpdateTaskRequest;
 import org.homework.taskmanagerservice.dto.response.TaskResponse;
 import org.homework.taskmanagerservice.entity.Task;
+import org.homework.taskmanagerservice.entity.TaskStatus;
 import org.homework.taskmanagerservice.exception.TaskNotFoundException;
+import org.homework.taskmanagerservice.kafka.KafkaMessagePublisher;
 import org.homework.taskmanagerservice.mapper.TaskMapper;
 import org.homework.taskmanagerservice.reposirory.TaskRepository;
 import org.homework.taskmanagerservice.service.TaskService;
@@ -18,13 +21,16 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final KafkaMessagePublisher kafkaMessagePublisher;
 
     @Override
     public TaskResponse createTask(NewTaskRequest request) {
 
+        Task task = taskMapper.toTask(request);
+        task.setStatus(TaskStatus.NEW);
+
         return taskMapper.toTaskResponse(
-                taskRepository.save(
-                        taskMapper.toTask(request)));
+                taskRepository.save(task));
     }
 
     @Override
@@ -45,6 +51,10 @@ public class TaskServiceImpl implements TaskService {
         }
         if (request.getUserId() != null) {
             task.setUserId(request.getUserId());
+        }
+        if (request.getStatus() != null) {
+            task.setStatus(request.getStatus());
+            kafkaMessagePublisher.sendMessage(new MessageEvent(task.getId(), task.getStatus().toString()));
         }
 
         return taskMapper.toTaskResponse(taskRepository.save(task));

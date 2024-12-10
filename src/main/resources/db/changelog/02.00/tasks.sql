@@ -1,0 +1,5 @@
+
+ALTER TABLE tasks ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'NEW';
+
+ALTER TABLE tasks ADD CONSTRAINT ch_task_status
+    CHECK (status in ('NEW', 'IN_PROGRESS', 'DONE'));

@@ -17,5 +17,41 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
 
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: dz-group-1
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: false
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    listener:
+      ack-mode: manual
+
+  mail:
+    host: smtp.gmail.com
+    password: sbaldpeafmxvvnuh
+    username: ilya.shutko@gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+  topic:
+    my_application:
+      name: status_on_topic
+
   liquibase:
     enabled: true
