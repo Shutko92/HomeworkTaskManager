@@ -12,12 +12,14 @@ import org.homework.taskmanagerservice.kafka.KafkaMessagePublisher;
 import org.homework.taskmanagerservice.mapper.TaskMapper;
 import org.homework.taskmanagerservice.reposirory.TaskRepository;
 import org.homework.taskmanagerservice.service.TaskService;
+import org.springbootstarter.loggingstarter.annotation.ServiceLogger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@ServiceLogger
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;

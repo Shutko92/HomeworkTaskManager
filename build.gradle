@@ -21,6 +21,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -38,6 +39,7 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.4.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.4.0'
+    implementation 'org.spring-boot-starter:LoggingStarter:0.0.1-SNAPSHOT'
 }
 
 tasks.named('test') {

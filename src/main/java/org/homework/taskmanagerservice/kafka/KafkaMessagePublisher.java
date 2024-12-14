@@ -1,6 +1,7 @@
 package org.homework.taskmanagerservice.kafka;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.homework.taskmanagerservice.dto.MessageEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class KafkaMessagePublisher {
     private final KafkaTemplate<String, MessageEvent> kafkaTemplate;
     @Value("${spring.topic.my_application.name}")
@@ -20,9 +22,9 @@ public class KafkaMessagePublisher {
         CompletableFuture<SendResult<String, MessageEvent>> future = kafkaTemplate.send(topic, message);
         future.whenComplete((result, ex) -> {
             if (ex == null) {
-                System.out.println("Sent message=[" + message + "] to topic=["+ result.getProducerRecord().topic() + "]");
+                log.info("Sent message=[{}] to topic=[{}]", message, result.getProducerRecord().topic());
             } else {
-                System.out.println("Unable to send message=[" + message + "] due to: " + ex.getMessage());
+                log.error("Unable to send message=[{}] due to: {}", message, ex.getMessage());
             }
         });
     }

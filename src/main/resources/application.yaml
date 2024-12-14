@@ -55,3 +55,7 @@ spring:
 
   liquibase:
     enabled: true
+
+  logging-api:
+    enabled: true
+    logging-level: INFO
