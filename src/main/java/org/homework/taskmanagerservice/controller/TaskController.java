@@ -5,6 +5,7 @@ import org.homework.taskmanagerservice.dto.request.NewTaskRequest;
 import org.homework.taskmanagerservice.dto.request.UpdateTaskRequest;
 import org.homework.taskmanagerservice.dto.response.TaskResponse;
 import org.homework.taskmanagerservice.service.TaskService;
+import org.springbootstarter.loggingstarter.annotation.ControllerLogger;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@ControllerLogger
 public class TaskController {
     private final TaskService taskService;
 

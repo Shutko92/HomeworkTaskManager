@@ -25,7 +25,7 @@ public class KafkaMessageListener {
             String body = "The status of the task with Id %d was changed to: %s";
             mailNotificationService.sendMail(mailTo, subject, body.formatted(message.getTaskId(), message.getStatus()));
         } catch (Exception e) {
-            System.err.println("Error processing message: " + e.getMessage());
+            log.error("Error processing message: {}", e.getMessage());
         }
     }
 }
