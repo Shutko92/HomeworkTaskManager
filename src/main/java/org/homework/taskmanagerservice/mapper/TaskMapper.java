@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TaskMapper {
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", ignore = true)
     Task toTask(NewTaskRequest request);
 
     TaskResponse toTaskResponse(Task task);
